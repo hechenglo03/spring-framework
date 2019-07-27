@@ -61,14 +61,15 @@ import org.springframework.lang.Nullable;
  * @see ClassPathXmlApplicationContext
  * @see FileSystemXmlApplicationContext
  * @see org.springframework.context.annotation.AnnotationConfigApplicationContext
+ * 这个类主要定义了是否重叠bean定义属性和是否依赖循环依赖属性，和基本IOC容器
  */
 public abstract class AbstractRefreshableApplicationContext extends AbstractApplicationContext {
 
 	@Nullable
-	private Boolean allowBeanDefinitionOverriding;
+	private Boolean allowBeanDefinitionOverriding;//是否允许bean定义重叠
 
 	@Nullable
-	private Boolean allowCircularReferences;
+	private Boolean allowCircularReferences;//设置循环依赖
 
 	/** Bean factory for this context. */
 	@Nullable
@@ -129,8 +130,8 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 		try {
 			DefaultListableBeanFactory beanFactory = createBeanFactory();
 			beanFactory.setSerializationId(getId());
-			customizeBeanFactory(beanFactory);
-			loadBeanDefinitions(beanFactory);
+			customizeBeanFactory(beanFactory);//定制循环依赖，相关属性
+			loadBeanDefinitions(beanFactory);//需要子类实现方法，在传统的xml文件当中，是AbstractXmlApplicationContext实现
 			synchronized (this.beanFactoryMonitor) {
 				this.beanFactory = beanFactory;
 			}
@@ -208,6 +209,7 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 	}
 
 	/**
+	 * 这里设置了DefaultListableBeanFactory 相关属性
 	 * Customize the internal bean factory used by this context.
 	 * Called for each {@link #refresh()} attempt.
 	 * <p>The default implementation applies this context's

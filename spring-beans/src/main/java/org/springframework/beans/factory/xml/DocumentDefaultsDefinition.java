@@ -26,6 +26,7 @@ import org.springframework.lang.Nullable;
  *
  * @author Juergen Hoeller
  * @since 2.0.2
+ * Bean的基本定义
  */
 public class DocumentDefaultsDefinition implements DefaultsDefinition {
 

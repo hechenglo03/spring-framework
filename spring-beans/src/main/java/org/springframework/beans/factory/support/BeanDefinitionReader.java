@@ -36,6 +36,8 @@ import org.springframework.lang.Nullable;
  * @author Juergen Hoeller
  * @since 1.1
  * @see org.springframework.core.io.Resource
+ * 这里定义了bean文件加载，
+ * 有bean注册中心类，加载过程
  */
 public interface BeanDefinitionReader {
 

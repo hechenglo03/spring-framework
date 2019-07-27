@@ -1,4 +1,6 @@
-package com.hcl.Test;
+package org.springframework;
+
+import java.util.List;
 
 /**
  * @Author hechenglong
@@ -13,6 +15,7 @@ public class Student {
 	private String name;
 
 	private String address;
+
 
 	public Long getId() {
 		return id;
@@ -35,6 +38,16 @@ public class Student {
 	}
 
 	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public Student(){
+
+	}
+
+	public Student(Long id,String name,String address){
+		this.id = id;
+		this.name = name;
 		this.address = address;
 	}
 

@@ -7,6 +7,15 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 	   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-		<bean id = "student" class = "com.hcl.Test.Student"></bean>
+
+
+
+		<bean id = "student" class = "org.springframework.Student">
+			<property name="id" value="99"></property>
+			<property name="address" value ="zj"></property>
+			<property name="name" value ="Name"></property>
+		</bean>
+
+		<bean id ="listener" class = "org.springframework.validation.TestListener"></bean>
 
 </beans>

@@ -62,6 +62,9 @@ import org.springframework.util.ObjectUtils;
 public abstract class AbstractApplicationEventMulticaster
 		implements ApplicationEventMulticaster, BeanClassLoaderAware, BeanFactoryAware {
 
+	/**
+	 * 可能在初始化的时候就塞进去了监听器
+	 */
 	private final ListenerRetriever defaultRetriever = new ListenerRetriever(false);
 
 	final Map<ListenerCacheKey, ListenerRetriever> retrieverCache = new ConcurrentHashMap<>(64);
@@ -205,6 +208,7 @@ public abstract class AbstractApplicationEventMulticaster
 	}
 
 	/**
+	 * 重建Spring监听器缓存
 	 * Actually retrieve the application listeners for the given event and source type.
 	 * @param eventType the event type
 	 * @param sourceType the event source type
@@ -222,7 +226,7 @@ public abstract class AbstractApplicationEventMulticaster
 			listenerBeans = new LinkedHashSet<>(this.defaultRetriever.applicationListenerBeans);
 		}
 		for (ApplicationListener<?> listener : listeners) {
-			if (supportsEvent(listener, eventType, sourceType)) {
+			if (supportsEvent(listener, eventType, sourceType)) {//监听器是否支持该事件
 				if (retriever != null) {
 					retriever.applicationListeners.add(listener);
 				}

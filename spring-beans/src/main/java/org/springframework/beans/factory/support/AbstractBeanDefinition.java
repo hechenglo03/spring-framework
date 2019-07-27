@@ -201,7 +201,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	private String description;
 
 	@Nullable
-	private Resource resource;
+	private Resource resource;//文件源
 
 
 	/**

@@ -68,7 +68,7 @@ dependencies {
 	cglib("cglib:cglib:${cglibVersion}@jar")
 	objenesis("org.objenesis:objenesis:${objenesisVersion}@jar")
 	jarjar("org.pantsbuild:jarjar:1.7.2")
-	coroutines(project(":spring-core-coroutines"))
+	compile(project(":spring-core-coroutines"))
 
 	compile(files(cglibRepackJar))
 	compile(files(objenesisRepackJar))

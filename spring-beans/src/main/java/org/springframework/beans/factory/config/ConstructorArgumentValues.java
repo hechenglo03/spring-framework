@@ -36,7 +36,7 @@ import org.springframework.util.ObjectUtils;
  *
  * <p>Supports values for a specific index in the constructor argument list
  * as well as for generic argument matches by type.
- *
+ * 构造器参数封装
  * @author Juergen Hoeller
  * @since 09.11.2003
  * @see BeanDefinition#getConstructorArgumentValues
@@ -436,13 +436,13 @@ public class ConstructorArgumentValues {
 	public static class ValueHolder implements BeanMetadataElement {
 
 		@Nullable
-		private Object value;
+		private Object value;//值
 
 		@Nullable
-		private String type;
+		private String type;//转换类型
 
 		@Nullable
-		private String name;
+		private String name;//参数名称
 
 		@Nullable
 		private Object source;
