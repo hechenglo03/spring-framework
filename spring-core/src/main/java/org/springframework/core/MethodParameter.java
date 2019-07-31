@@ -61,9 +61,9 @@ public class MethodParameter {
 
 	private static final Annotation[] EMPTY_ANNOTATION_ARRAY = new Annotation[0];
 
-	private final Executable executable;
+	private final Executable executable;//方法
 
-	private final int parameterIndex;
+	private final int parameterIndex;//参数位置
 
 	@Nullable
 	private volatile Parameter parameter;
@@ -75,22 +75,22 @@ public class MethodParameter {
 	Map<Integer, Integer> typeIndexesPerLevel;
 
 	@Nullable
-	private volatile Class<?> containingClass;
+	private volatile Class<?> containingClass;//方法所包含的类
 
 	@Nullable
-	private volatile Class<?> parameterType;
+	private volatile Class<?> parameterType;//参数类型
 
 	@Nullable
-	private volatile Type genericParameterType;
+	private volatile Type genericParameterType;//返回类型
 
 	@Nullable
-	private volatile Annotation[] parameterAnnotations;
+	private volatile Annotation[] parameterAnnotations;//注解
 
 	@Nullable
 	private volatile ParameterNameDiscoverer parameterNameDiscoverer;
 
 	@Nullable
-	private volatile String parameterName;
+	private volatile String parameterName;//参数名称
 
 	@Nullable
 	private volatile MethodParameter nestedMethodParameter;

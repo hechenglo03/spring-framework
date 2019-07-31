@@ -55,4 +55,8 @@ public class Student {
 	public String toString(){
 		return this.id+"----"+this.name+"---------"+this.address;
 	}
+
+	public String replace(){
+		return "Student";
+	}
 }

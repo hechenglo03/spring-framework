@@ -43,6 +43,7 @@ import org.springframework.util.ObjectUtils;
  */
 public class ConstructorArgumentValues {
 
+	//索引标注的构造参数
 	private final Map<Integer, ValueHolder> indexedArgumentValues = new LinkedHashMap<>();
 
 	private final List<ValueHolder> genericArgumentValues = new ArrayList<>();
@@ -447,7 +448,7 @@ public class ConstructorArgumentValues {
 		@Nullable
 		private Object source;
 
-		private boolean converted = false;
+		private boolean converted = false;//构造器的值是否被转化过
 
 		@Nullable
 		private Object convertedValue;

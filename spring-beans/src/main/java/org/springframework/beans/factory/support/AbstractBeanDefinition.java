@@ -164,8 +164,10 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	@Nullable
 	private Supplier<?> instanceSupplier;
 
+	//允许访问非公开的构造器和方法，程序设置
 	private boolean nonPublicAccessAllowed = true;
 
+	//是否已宽松模式来辨别，工厂方法
 	private boolean lenientConstructorResolution = true;
 
 	@Nullable
@@ -846,6 +848,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 
 	/**
 	 * Return if there are constructor argument values defined for this bean.
+	 * 用于判断是否有构造参数
 	 */
 	@Override
 	public boolean hasConstructorArgumentValues() {

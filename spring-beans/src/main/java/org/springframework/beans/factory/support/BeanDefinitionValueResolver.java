@@ -274,6 +274,7 @@ class BeanDefinitionValueResolver {
 	 * Evaluate the given String value as an expression, if necessary.
 	 * @param value the original value (may be an expression)
 	 * @return the resolved value if necessary, or the original String value
+	 * 采用Spel解析出正确的值
 	 */
 	@Nullable
 	private Object doEvaluate(@Nullable String value) {

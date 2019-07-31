@@ -1,4 +1,17 @@
 package org.springframework;
 
-public class MyFactoryBean {
+import org.springframework.beans.factory.FactoryBean;
+
+public class MyFactoryBean implements FactoryBean<Student> {
+	private Student student = new Student();
+
+	@Override
+	public Student getObject() throws Exception {
+		return student;
+	}
+
+	@Override
+	public Class<Student> getObjectType() {
+		return Student.class;
+	}
 }

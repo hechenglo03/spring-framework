@@ -39,6 +39,7 @@ public abstract class MethodOverride implements BeanMetadataElement {
 
 	private final String methodName;
 
+	//是否用特殊方法来消除方法名称歧义
 	private boolean overloaded = true;
 
 	@Nullable
