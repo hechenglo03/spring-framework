@@ -104,7 +104,7 @@ public class DefaultConversionService extends GenericConversionService {
 	 * @param converterRegistry the registry of converters to add to
 	 * (must also be castable to ConversionService, e.g. being a {@link ConfigurableConversionService})
 	 * @throws ClassCastException if the given ConverterRegistry could not be cast to a ConversionService
-	 * @since 4.2.3
+	 * @since 4.2.3,集合转换器
 	 */
 	public static void addCollectionConverters(ConverterRegistry converterRegistry) {
 		ConversionService conversionService = (ConversionService) converterRegistry;

@@ -9,4 +9,8 @@ public class Factory {
 		student.setName(name);
 		return student;
 	}
+
+	public String getStudent(String name,String address,Long id,double dot){
+		return "ONE";
+	}
 }

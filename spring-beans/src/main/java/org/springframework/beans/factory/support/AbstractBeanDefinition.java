@@ -148,7 +148,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	@Nullable
 	private Boolean lazyInit;
 
-	private int autowireMode = AUTOWIRE_NO;
+	private int autowireMode = AUTOWIRE_NO;//自动装配模式
 
 	private int dependencyCheck = DEPENDENCY_CHECK_NONE;
 
@@ -179,6 +179,9 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	@Nullable
 	private ConstructorArgumentValues constructorArgumentValues;
 
+	/**
+	 * 注入属性 <property name="" value=""
+	 */
 	@Nullable
 	private MutablePropertyValues propertyValues;
 

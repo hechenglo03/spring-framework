@@ -202,9 +202,10 @@ class BeanDefinitionValueResolver {
 		else if (value instanceof TypedStringValue) {
 			// Convert value to target type here.
 			TypedStringValue typedStringValue = (TypedStringValue) value;
-			Object valueObject = evaluate(typedStringValue);
+			Object valueObject = evaluate(typedStringValue);//Spel表达式解析
+			//这个转化后类型是什么时候塞进去的
 			try {
-				Class<?> resolvedTargetType = resolveTargetType(typedStringValue);
+				Class<?> resolvedTargetType = resolveTargetType(typedStringValue);//获取转换类型
 				if (resolvedTargetType != null) {
 					return this.typeConverter.convertIfNecessary(valueObject, resolvedTargetType);
 				}

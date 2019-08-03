@@ -15,7 +15,8 @@ import java.util.Set;
 public class Application {
 	public static void main(String[] args){
 		ApplicationContext context = new ClassPathXmlApplicationContext("bean.xml");
-		Student student = (Student) context.getBean("studentFactoy");
+		Student student = (Student)context.getBean("student");
+		Person  person = (Person) context.getBean("person");
 		System.out.println(student);
 	}
 

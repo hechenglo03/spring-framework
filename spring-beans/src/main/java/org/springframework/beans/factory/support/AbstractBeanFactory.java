@@ -130,7 +130,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	@Nullable
 	private BeanExpressionResolver beanExpressionResolver;
 
-	/** Spring ConversionService to use instead of PropertyEditors. */
+	/** Spring ConversionService to use instead of PropertyEditors.转换器 */
 	@Nullable
 	private ConversionService conversionService;
 
@@ -239,7 +239,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	protected <T> T doGetBean(final String name, @Nullable final Class<T> requiredType,
 			@Nullable final Object[] args, boolean typeCheckOnly) throws BeansException {
 
-		final String beanName = transformedBeanName(name);
+		final String beanName = transformedBeanName(name);//获取bean的真实名称，主要是针对于FactoryBean的处理
 		Object bean;
 
 		// Eagerly check singleton cache for manually registered singletons.
@@ -247,19 +247,18 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 		if (sharedInstance != null && args == null) {
 			if (logger.isTraceEnabled()) {
 				if (isSingletonCurrentlyInCreation(beanName)) {
-					logger.trace("Returning eagerly cached instance of singleton bean '" + beanName +
-							"' that is not fully initialized yet - a consequence of a circular reference");
-				}
-				else {
+					logger.trace(
+							"Returning eagerly cached instance of singleton bean '" + beanName +
+									"' that is not fully initialized yet - a consequence of a circular reference");
+				} else {
 					logger.trace("Returning cached instance of singleton bean '" + beanName + "'");
 				}
 			}
 			bean = getObjectForBeanInstance(sharedInstance, name, beanName, null);
-		}
-
-		else {
+		}else {
 			// Fail if we're already creating this bean instance:
 			// We're assumably within a circular reference.
+			// 多态创建为什么要抛出异常
 			if (isPrototypeCurrentlyInCreation(beanName)) {
 				throw new BeanCurrentlyInCreationException(beanName);
 			}
@@ -294,7 +293,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 				final RootBeanDefinition mbd = getMergedLocalBeanDefinition(beanName);//以后再看
 				checkMergedBeanDefinition(mbd, beanName, args);//
 
-				// Guarantee initialization of beans that the current bean depends on.
+				// 这里的逻辑是为了防止依赖循环
 				String[] dependsOn = mbd.getDependsOn();
 				if (dependsOn != null) {
 					for (String dep : dependsOn) {
@@ -1157,7 +1156,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	 */
 	protected void initBeanWrapper(BeanWrapper bw) {
 		bw.setConversionService(getConversionService());
-		registerCustomEditors(bw);
+		registerCustomEditors(bw);//属性输入的时候使用
 	}
 
 	/**
@@ -1645,6 +1644,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			Object beanInstance, String name, String beanName, @Nullable RootBeanDefinition mbd) {
 
 		// Don't let calling code try to dereference the factory if the bean isn't a factory.
+		// 如果bean开头是以&开头，但是不是FactoryBean，则抛出异常
 		if (BeanFactoryUtils.isFactoryDereference(name)) {
 			if (beanInstance instanceof NullBean) {
 				return beanInstance;
@@ -1663,7 +1663,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 
 		Object object = null;
 		if (mbd == null) {
-			object = getCachedObjectForFactoryBean(beanName);//获取缓存中FactoryBean的数据，beanname和beanname调用的getObject方法产生bean映射
+			object = getCachedObjectForFactoryBean(beanName);//获取缓存中FactoryBean的数据，beaname和beanname调用的getObject方法产生bean映射
 		}
 		if (object == null) {
 			// Return bean instance from factory.

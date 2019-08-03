@@ -409,6 +409,7 @@ class ConstructorResolver {
 			isStatic = true;
 		}
 
+		//确定了工厂的bean
 		Method factoryMethodToUse = null;
 		ArgumentsHolder argsHolderToUse = null;
 		Object[] argsToUse = null;//变量
@@ -428,7 +429,7 @@ class ConstructorResolver {
 					}
 				}
 			}
-			//如果bean定义当中有未
+			//如果bean定义当中有未，问题是什么情况下RootBeanDefinition 会有preparedConstructorArguments
 			if (argsToResolve != null) {
 				argsToUse = resolvePreparedArguments(beanName, mbd, bw, factoryMethodToUse, argsToResolve, true);
 			}
@@ -440,7 +441,7 @@ class ConstructorResolver {
 			factoryClass = ClassUtils.getUserClass(factoryClass);
 
 			List<Method> candidateList = null;
-			if (mbd.isFactoryMethodUnique) {
+			if (mbd.isFactoryMethodUnique) {//决定工厂的方法名是否是独一无二的
 				if (factoryMethodToUse == null) {
 					factoryMethodToUse = mbd.getResolvedFactoryMethod();
 				}
@@ -491,7 +492,7 @@ class ConstructorResolver {
 				if (mbd.hasConstructorArgumentValues()) {
 					ConstructorArgumentValues cargs = mbd.getConstructorArgumentValues();
 					resolvedValues = new ConstructorArgumentValues();
-					minNrOfArgs = resolveConstructorArguments(beanName, mbd, bw, cargs, resolvedValues);
+					minNrOfArgs = resolveConstructorArguments(beanName, mbd, bw, cargs, resolvedValues);//解析出构造参数
 				}
 				else {
 					minNrOfArgs = 0;
@@ -540,6 +541,7 @@ class ConstructorResolver {
 
 					int typeDiffWeight = (mbd.isLenientConstructorResolution() ?
 							argsHolder.getTypeDifferenceWeight(paramTypes) : argsHolder.getAssignabilityWeight(paramTypes));
+					//宽松模式和严谨模式
 					// Choose this factory method if it represents the closest match.
 					if (typeDiffWeight < minTypeDiffWeight) {
 						factoryMethodToUse = candidate;
@@ -615,7 +617,7 @@ class ConstructorResolver {
 
 			if (explicitArgs == null && argsHolderToUse != null) {
 				mbd.factoryMethodToIntrospect = factoryMethodToUse;
-				argsHolderToUse.storeCache(mbd, factoryMethodToUse);
+				argsHolderToUse.storeCache(mbd, factoryMethodToUse);//存储解析后参数
 			}
 		}
 
@@ -757,11 +759,11 @@ class ConstructorResolver {
 					if (sourceHolder instanceof ConstructorArgumentValues.ValueHolder) {
 						Object sourceValue = ((ConstructorArgumentValues.ValueHolder) sourceHolder).getValue();
 						args.resolveNecessary = true;
-						args.preparedArguments[paramIndex] = sourceValue;
+						args.preparedArguments[paramIndex] = sourceValue;//原始值
 					}
 				}
-				args.arguments[paramIndex] = convertedValue;
-				args.rawArguments[paramIndex] = originalValue;
+				args.arguments[paramIndex] = convertedValue;//转化后的值
+				args.rawArguments[paramIndex] = originalValue;//最初的值
 			}
 			else {
 				MethodParameter methodParam = MethodParameter.forExecutable(executable, paramIndex);
@@ -913,9 +915,9 @@ class ConstructorResolver {
 	private static class ArgumentsHolder {
 
 		//xml当中输入的值
-		public final Object[] rawArguments;
+		public final Object[] rawArguments;//转化前的值
 
-		public final Object[] arguments;
+		public final Object[] arguments;//转化后的值
 
 		public final Object[] preparedArguments;
 
