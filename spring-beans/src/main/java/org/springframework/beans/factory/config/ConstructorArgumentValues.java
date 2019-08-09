@@ -46,6 +46,7 @@ public class ConstructorArgumentValues {
 	//索引标注的构造参数
 	private final Map<Integer, ValueHolder> indexedArgumentValues = new LinkedHashMap<>();
 
+	//顺序标注
 	private final List<ValueHolder> genericArgumentValues = new ArrayList<>();
 
 

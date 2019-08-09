@@ -8,6 +8,7 @@ import java.util.List;
  * @Description
  **/
 
+@One
 public class Student {
 
 	private Long id;

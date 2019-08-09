@@ -47,6 +47,7 @@ public class PropertiesPropertySource extends MapPropertySource {
 
 	@Override
 	public String[] getPropertyNames() {
+		//这里的source指的是Map<String,Object>
 		synchronized (this.source) {
 			return super.getPropertyNames();
 		}

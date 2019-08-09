@@ -18,26 +18,26 @@
 		</bean>
 
 
-		<bean id ="factory" class = "org.springframework.Factory"></bean>
+<!--		<bean id ="factory" class = "org.springframework.Factory"></bean>-->
 
-		<bean id = "studentFactoy" factory-bean="factory" factory-method="getStudent">
-			<constructor-arg name="id" value="1"></constructor-arg>
-			<constructor-arg name="address" value="2"></constructor-arg>
-			<constructor-arg name="name" value="3"></constructor-arg>
-		</bean>
+<!--		<bean id = "studentFactoy" factory-bean="factory" factory-method="getStudent">-->
+<!--			<constructor-arg name="id" value="1"></constructor-arg>-->
+<!--			<constructor-arg name="address" value="2"></constructor-arg>-->
+<!--			<constructor-arg name="name" value="3"></constructor-arg>-->
+<!--		</bean>-->
 
-		<bean id = "processor" class = "org.springframework.BeforeBeanPostProcessor"></bean>
+<!--		<bean id = "processor" class = "org.springframework.BeforeBeanPostProcessor"></bean>-->
 
-		<bean id = "replace" class = "org.springframework.Replace"></bean>
+<!--		<bean id = "replace" class = "org.springframework.Replace"></bean>-->
 
-		<bean id = "sub" class = "org.springframework.SubStudent"></bean>
-		<bean id = "look" class = "org.springframework.LookUp">
-			<lookup-method name="getStudent" bean="sub"></lookup-method>
-		</bean>
+<!--		<bean id = "sub" class = "org.springframework.SubStudent"></bean>-->
+<!--		<bean id = "look" class = "org.springframework.LookUp">-->
+<!--			<lookup-method name="getStudent" bean="sub"></lookup-method>-->
+<!--		</bean>-->
 
-		<bean id ="factoryBean" class="org.springframework.MyFactoryBean"></bean>
+<!--		<bean id ="factoryBean" class="org.springframework.MyFactoryBean"></bean>-->
 
-		<alias name="student" alias="aliasStudent"></alias>
-		<import resource="resource.xml"></import>
+<!--		<alias name="student" alias="aliasStudent"></alias>-->
+<!--		<import resource="resource.xml"></import>-->
 
 </beans>

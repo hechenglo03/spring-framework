@@ -55,7 +55,7 @@ import org.springframework.util.StringUtils;
  * @author Rob Harrop
  * @author Erik Wiersma
  * @since 18.12.2003
- * Bean的解析
+ *  xml 解析的类
  */
 public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocumentReader {
 

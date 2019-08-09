@@ -34,7 +34,7 @@ public class DocumentDefaultsDefinition implements DefaultsDefinition {
 	private String lazyInit;
 
 	@Nullable
-	private String merge;
+	private String merge;//子类当中List对父类的list进行merge
 
 	@Nullable
 	private String autowire;

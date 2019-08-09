@@ -23,7 +23,7 @@ import org.springframework.lang.Nullable;
 
 /**
  * Holder containing one or more {@link PropertySource} objects.
- *
+ * 包含多个PropertySource
  * @author Chris Beams
  * @author Juergen Hoeller
  * @since 3.1

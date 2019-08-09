@@ -151,6 +151,9 @@ public class DefaultResourceLoader implements ResourceLoader {
 			}
 		}
 
+		/**
+		 * 为什么要区分两种resource，一种是classpathResource 另一种是classpathcontextResource
+		 */
 		if (location.startsWith("/")) {
 			return getResourceByPath(location);
 		}
@@ -159,7 +162,7 @@ public class DefaultResourceLoader implements ResourceLoader {
 		}
 		else {
 			try {
-				// Try to parse the location as a URL...
+				// Try to parse the location as a URL..
 				URL url = new URL(location);
 				return (ResourceUtils.isFileURL(url) ? new FileUrlResource(url) : new UrlResource(url));
 			}

@@ -179,6 +179,7 @@ import org.springframework.util.StringUtils;
  * @see org.springframework.util.AntPathMatcher
  * @see org.springframework.core.io.ResourceLoader#getResource(String)
  * @see ClassLoader#getResources(String)
+ * 区别与传统的ResourceLoader，可以加载多个Resource
  */
 public class PathMatchingResourcePatternResolver implements ResourcePatternResolver {
 

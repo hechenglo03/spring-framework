@@ -434,6 +434,7 @@ class ConstructorResolver {
 			}
 		}
 
+		//所有都还没有解析出来
 		if (factoryMethodToUse == null || argsToUse == null) {
 			// Need to determine the factory method...
 			// Try all methods with this name to see if they match the given arguments.
@@ -474,7 +475,7 @@ class ConstructorResolver {
 			}
 
 			Method[] candidates = candidateList.toArray(new Method[0]);
-			AutowireUtils.sortFactoryMethods(candidates);
+			AutowireUtils.sortFactoryMethods(candidates);//排序
 
 			ConstructorArgumentValues resolvedValues = null;
 			boolean autowiring = (mbd.getResolvedAutowireMode() == AutowireCapableBeanFactory.AUTOWIRE_CONSTRUCTOR);
@@ -913,11 +914,11 @@ class ConstructorResolver {
 	private static class ArgumentsHolder {
 
 		//xml当中输入的值
-		public final Object[] rawArguments;
+		public final Object[] rawArguments;//原来的值
 
-		public final Object[] arguments;
+		public final Object[] arguments;//解析后的值
 
-		public final Object[] preparedArguments;
+		public final Object[] preparedArguments;//解析后的值
 
 		public boolean resolveNecessary = false;
 

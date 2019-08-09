@@ -229,7 +229,7 @@ public class BeanDefinitionParserDelegate {
 
 	private final XmlReaderContext readerContext;
 
-	private final DocumentDefaultsDefinition defaults = new DocumentDefaultsDefinition();
+	private final DocumentDefaultsDefinition defaults = new DocumentDefaultsDefinition();//默认属性
 
 	private final ParseState parseState = new ParseState();
 

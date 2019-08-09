@@ -27,7 +27,7 @@ import org.springframework.core.convert.converter.ConverterRegistry;
  * Converters} through. The latter is particularly useful when working against a
  * {@link org.springframework.core.env.ConfigurableEnvironment ConfigurableEnvironment}
  * instance in application context bootstrapping code.
- *
+ * 转化器和转化器注册中心
  * @author Chris Beams
  * @since 3.1
  * @see org.springframework.core.env.ConfigurablePropertyResolver#getConversionService()
