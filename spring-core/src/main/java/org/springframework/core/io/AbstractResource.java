@@ -59,6 +59,7 @@ public abstract class AbstractResource implements Resource {
 			return getFile().exists();
 		}
 		catch (IOException ex) {
+			//通过IO流来判断文件是否可以打开
 			// Fall back to stream existence: can we open the stream?
 			try {
 				getInputStream().close();
@@ -91,6 +92,7 @@ public abstract class AbstractResource implements Resource {
 
 	/**
 	 * This implementation always returns {@code false}.
+	 * 为什么返回false
 	 */
 	@Override
 	public boolean isFile() {

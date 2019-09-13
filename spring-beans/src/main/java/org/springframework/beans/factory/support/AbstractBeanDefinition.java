@@ -138,17 +138,18 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 
 
 	@Nullable
-	private volatile Object beanClass;
+	private volatile Object beanClass;//该bean的Class类，可能是String
 
 	@Nullable
 	private String scope = SCOPE_DEFAULT;
 
+	//抽象标志
 	private boolean abstractFlag = false;
 
 	@Nullable
 	private Boolean lazyInit;
 
-	private int autowireMode = AUTOWIRE_NO;
+	private int autowireMode = AUTOWIRE_NO;//自动装配模式
 
 	private int dependencyCheck = DEPENDENCY_CHECK_NONE;
 
@@ -179,6 +180,9 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	@Nullable
 	private ConstructorArgumentValues constructorArgumentValues;
 
+	/**
+	 * 注入属性 <property name="" value=""
+	 */
 	@Nullable
 	private MutablePropertyValues propertyValues;
 

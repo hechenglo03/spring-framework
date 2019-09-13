@@ -423,6 +423,7 @@ public class BeanDefinitionParserDelegate {
 
 		String beanName = id;
 		if (!StringUtils.hasText(beanName) && !aliases.isEmpty()) {
+			//如果没有设置<bean id 没有设置，则去name当中的第一个名字
 			beanName = aliases.remove(0);
 			if (logger.isTraceEnabled()) {
 				logger.trace("No XML 'id' specified - using '" + beanName +
@@ -436,6 +437,7 @@ public class BeanDefinitionParserDelegate {
 
 		AbstractBeanDefinition beanDefinition = parseBeanDefinitionElement(ele, beanName, containingBean);
 		if (beanDefinition != null) {
+			//如果<bean name = ""，没有设置id
 			if (!StringUtils.hasText(beanName)) {
 				try {
 					if (containingBean != null) {
@@ -512,6 +514,7 @@ public class BeanDefinitionParserDelegate {
 		}
 
 		try {
+			//可能BeanDefinition中可能没有class 和 name
 			AbstractBeanDefinition bd = createBeanDefinition(className, parent);
 
 			parseBeanDefinitionAttributes(ele, beanName, containingBean, bd);//设置bean启动相关属性<bean 标签
@@ -782,7 +785,7 @@ public class BeanDefinitionParserDelegate {
 				else {
 					try {
 						this.parseState.push(new ConstructorArgumentEntry(index));//添加记录
-						Object value = parsePropertyValue(ele, bd, null);
+						Object value = parsePropertyValue(ele, bd, null);//有可能是BeanDefinitionHolder
 						ConstructorArgumentValues.ValueHolder valueHolder = new ConstructorArgumentValues.ValueHolder(value);
 						if (StringUtils.hasLength(typeAttr)) {
 							valueHolder.setType(typeAttr);
@@ -914,7 +917,7 @@ public class BeanDefinitionParserDelegate {
 					!nodeNameEquals(node, META_ELEMENT)) {
 				// Child element is what we're looking for.
 				if (subElement != null) {
-					error(elementName + " must not contain more than one sub-element", ele);
+					error(elementName + " ust not contain morme than one sub-element", ele);
 				}
 				else {
 					subElement = (Element) node;
@@ -924,6 +927,7 @@ public class BeanDefinitionParserDelegate {
 
 		boolean hasRefAttribute = ele.hasAttribute(REF_ATTRIBUTE);//是否有ref标志
 		boolean hasValueAttribute = ele.hasAttribute(VALUE_ATTRIBUTE);
+		//如果<constructor-arg 中有value和ref，子节点不可以有<bean
 		if ((hasRefAttribute && hasValueAttribute) ||
 				((hasRefAttribute || hasValueAttribute) && subElement != null)) {
 			error(elementName +
@@ -945,7 +949,8 @@ public class BeanDefinitionParserDelegate {
 			return valueHolder;
 		}
 		else if (subElement != null) {
-			return parsePropertySubElement(subElement, bd);
+			//解析子节点
+			return parsePropertySubElement(subElement, bd);//解析map list
 		}
 		else {
 			// Neither child element nor "ref" or "value" attribute found.
@@ -1371,6 +1376,13 @@ public class BeanDefinitionParserDelegate {
 		return decorateBeanDefinitionIfRequired(ele, definitionHolder, null);
 	}
 
+	/**
+	 * 作为内层的<bean使用封装
+	 * @param ele
+	 * @param definitionHolder
+	 * @param containingBd
+	 * @return
+	 */
 	public BeanDefinitionHolder decorateBeanDefinitionIfRequired(
 			Element ele, BeanDefinitionHolder definitionHolder, @Nullable BeanDefinition containingBd) {
 

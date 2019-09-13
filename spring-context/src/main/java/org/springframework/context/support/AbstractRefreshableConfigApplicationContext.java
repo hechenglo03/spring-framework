@@ -35,6 +35,7 @@ import org.springframework.util.StringUtils;
  * @see #setConfigLocation
  * @see #setConfigLocations
  * @see #getDefaultConfigLocations
+ * 接入 BeanNameAware和InitializingBean接口
  */
 public abstract class AbstractRefreshableConfigApplicationContext extends AbstractRefreshableApplicationContext
 		implements BeanNameAware, InitializingBean {
@@ -108,6 +109,7 @@ public abstract class AbstractRefreshableConfigApplicationContext extends Abstra
 	 * requiring explicit config locations.
 	 * @return an array of default config locations, if any
 	 * @see #setConfigLocations
+	 * 主流IOC容器没有用到这个
 	 */
 	@Nullable
 	protected String[] getDefaultConfigLocations() {

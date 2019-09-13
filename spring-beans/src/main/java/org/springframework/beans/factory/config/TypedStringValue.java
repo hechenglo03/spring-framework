@@ -38,10 +38,10 @@ import org.springframework.util.ObjectUtils;
 public class TypedStringValue implements BeanMetadataElement {
 
 	@Nullable
-	private String value;
+	private String value;//<constructor-arg value = ?
 
 	@Nullable
-	private volatile Object targetType;
+	private volatile Object targetType;//目标类
 
 	@Nullable
 	private Object source;
@@ -49,7 +49,7 @@ public class TypedStringValue implements BeanMetadataElement {
 	@Nullable
 	private String specifiedTypeName;
 
-	private volatile boolean dynamic;
+	private volatile boolean dynamic;//是否标记了Spel语句
 
 
 	/**

@@ -122,6 +122,7 @@ class BeanDefinitionValueResolver {
 			return refName;
 		}
 		else if (value instanceof BeanDefinitionHolder) {
+
 			// Resolve BeanDefinitionHolder: contains BeanDefinition with name and aliases.
 			BeanDefinitionHolder bdHolder = (BeanDefinitionHolder) value;
 			return resolveInnerBean(argName, bdHolder.getBeanName(), bdHolder.getBeanDefinition());
@@ -202,9 +203,10 @@ class BeanDefinitionValueResolver {
 		else if (value instanceof TypedStringValue) {
 			// Convert value to target type here.
 			TypedStringValue typedStringValue = (TypedStringValue) value;
-			Object valueObject = evaluate(typedStringValue);
+			Object valueObject = evaluate(typedStringValue);//Spel表达式解析
+			//这个转化后类型是什么时候塞进去的
 			try {
-				Class<?> resolvedTargetType = resolveTargetType(typedStringValue);
+				Class<?> resolvedTargetType = resolveTargetType(typedStringValue);//获取转换类型
 				if (resolvedTargetType != null) {
 					return this.typeConverter.convertIfNecessary(valueObject, resolvedTargetType);
 				}
@@ -355,6 +357,7 @@ class BeanDefinitionValueResolver {
 	private Object resolveInnerBean(Object argName, String innerBeanName, BeanDefinition innerBd) {
 		RootBeanDefinition mbd = null;
 		try {
+			//这里用到，包含的类方法，containBd为外层的BeanDefinition
 			mbd = this.beanFactory.getMergedBeanDefinition(innerBeanName, innerBd, this.beanDefinition);
 			// Check given bean name whether it is unique. If not already unique,
 			// add counter - increasing the counter until the name is unique.

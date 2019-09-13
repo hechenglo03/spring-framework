@@ -35,22 +35,22 @@ import org.springframework.util.Assert;
 
 /**
  * A root bean definition represents the merged bean definition that backs
- * a specific bean in a Spring BeanFactory at runtime. It might have been created
- * from multiple original bean definitions that inherit from each other,
- * typically registered as {@link GenericBeanDefinition GenericBeanDefinitions}.
- * A root bean definition is essentially the 'unified' bean definition view at runtime.
- *
- * <p>Root bean definitions may also be used for registering individual bean definitions
- * in the configuration phase. However, since Spring 2.5, the preferred way to register
- * bean definitions programmatically is the {@link GenericBeanDefinition} class.
- * GenericBeanDefinition has the advantage that it allows to dynamically define
- * parent dependencies, not 'hard-coding' the role as a root bean definition.
- *
- * @author Rod Johnson
- * @author Juergen Hoeller
- * @see GenericBeanDefinition
- * @see ChildBeanDefinition
- */
+		* a specific bean in a Spring BeanFactory at runtime. It might have been created
+		* from multiple original bean definitions that inherit from each other,
+		* typically registered as {@link GenericBeanDefinition GenericBeanDefinitions}.
+		* A root bean definition is essentially the 'unified' bean definition view at runtime.
+		*
+		* <p>Root bean definitions may also be used for registering individual bean definitions
+		* in the configuration phase. However, since Spring 2.5, the preferred way to register
+		* bean definitions programmatically is the {@link GenericBeanDefinition} class.
+		* GenericBeanDefinition has the advantage that it allows to dynamically define
+		* parent dependencies, not 'hard-coding' the role as a root bean definition.
+		*
+		* @author Rod Johnson
+		* @author Juergen Hoeller
+		* @see GenericBeanDefinition
+		* @see ChildBeanDefinition
+		*/
 @SuppressWarnings("serial")
 public class RootBeanDefinition extends AbstractBeanDefinition {
 
@@ -62,6 +62,7 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
 
 	boolean allowCaching = true;
 
+	//表示是否生成的类只能通过工厂方法
 	boolean isFactoryMethodUnique = false;
 
 	@Nullable
@@ -69,9 +70,9 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
 
 	/** Package-visible field for caching the determined Class of a given bean definition. */
 	@Nullable
-	volatile Class<?> resolvedTargetType;
+	volatile Class<?> resolvedTargetType;//解析之后的类Class
 
-	/** Package-visible field for caching the return type of a generically typed factory method. */
+	/** Package-visible field for caching the return type of a generically typed factory method.工厂方法返回类型 */
 	@Nullable
 	volatile ResolvableType factoryMethodReturnType;
 
@@ -96,7 +97,7 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
 	@Nullable
 	Object[] resolvedConstructorArguments;
 
-	/** Package-visible field for caching partly prepared constructor arguments. */
+	/** Package-visible field for caching partly prepared constructor arguments.部分解析，部分未解析集合 */
 	@Nullable
 	Object[] preparedConstructorArguments;
 

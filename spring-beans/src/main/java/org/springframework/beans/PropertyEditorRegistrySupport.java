@@ -105,10 +105,10 @@ public class PropertyEditorRegistrySupport implements PropertyEditorRegistry {
 	private Map<Class<?>, PropertyEditor> overriddenDefaultEditors;
 
 	@Nullable
-	private Map<Class<?>, PropertyEditor> customEditors;
+	private Map<Class<?>, PropertyEditor> customEditors;//class 与 ProperyEditor映射关系
 
 	@Nullable
-	private Map<String, CustomEditorHolder> customEditorsForPath;
+	private Map<String, CustomEditorHolder> customEditorsForPath;//定制版本map集合
 
 	@Nullable
 	private Map<Class<?>, PropertyEditor> customEditorCache;

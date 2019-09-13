@@ -1,32 +1,47 @@
 package org.springframework;
 
+import java.util.List;
+import java.util.Optional;
+
 /**
  * @Author hechenglong
  * @Date 2019/7/21
  * @Description
  **/
-
+@One
 public class Person {
 
-	private String school;
+	private Student student;
 
+	private Address address;
 
-	private String home;
+	private Optional<String> optional;
 
-	public String getSchool() {
-		return school;
+	public Person(Student student){
+		this.student = student;
 	}
 
-	public void setSchool(String school) {
-		this.school = school;
+	public Student getStudent() {
+		return student;
 	}
 
-
-	public String getHome() {
-		return home;
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 
-	public void setHome(String home) {
-		this.home = home;
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public Optional getOptional() {
+		return optional;
+	}
+
+	public void setOptional(Optional optional) {
+		this.optional = optional;
 	}
 }

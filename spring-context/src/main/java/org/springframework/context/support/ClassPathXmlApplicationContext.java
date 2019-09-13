@@ -23,6 +23,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
+import java.io.IOException;
+
 /**
  * Standalone XML application context, taking the context definition files
  * from the class path, interpreting plain paths as class path resource names

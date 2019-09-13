@@ -164,8 +164,8 @@ public final class CachedIntrospectionResults {
 	 * @throws BeansException in case of introspection failure
 	 */
 	@SuppressWarnings("unchecked")
-	static CachedIntrospectionResults forClass(Class<?> beanClass) throws BeansException {
-		CachedIntrospectionResults results = strongClassCache.get(beanClass);
+	public static CachedIntrospectionResults forClass(Class<?> beanClass) throws BeansException {
+		CachedIntrospectionResults results = strongClassCache.get(beanClass);//缓存
 		if (results != null) {
 			return results;
 		}

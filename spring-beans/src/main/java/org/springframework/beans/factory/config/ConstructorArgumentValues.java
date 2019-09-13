@@ -438,7 +438,7 @@ public class ConstructorArgumentValues {
 	public static class ValueHolder implements BeanMetadataElement {
 
 		@Nullable
-		private Object value;//值
+		private Object value;//可能是BeanDefinitionHolder,TypedStringReference
 
 		@Nullable
 		private String type;//转换类型
@@ -447,12 +447,12 @@ public class ConstructorArgumentValues {
 		private String name;//参数名称
 
 		@Nullable
-		private Object source;
+		private Object source;//没有转换之前的BeanDefinitionHolder
 
 		private boolean converted = false;//构造器的值是否被转化过
 
 		@Nullable
-		private Object convertedValue;
+		private Object convertedValue;//转换之后的值
 
 		/**
 		 * Create a new ValueHolder for the given value.

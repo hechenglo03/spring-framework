@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xmlns:aop="http://www.springframework.org/schema/aop"
-		xmlns:context="http://www.springframework.org/schema/context"
 		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 	   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
@@ -10,15 +8,61 @@
 
 
 
-		<bean id = "student" class = "org.springframework.Student">
-			<property name="id" value="99"></property>
-			<property name="address" value ="zj"></property>
-			<property name="name" value ="Name"></property>
-			<replaced-method name="replace" replacer="replace"></replaced-method>
+<!--		<bean id = "student" class = "org.springframework.Student">-->
+<!--			<property name="id" value="99"></property>-->
+<!--			<property name="address" value ="zj"></property>-->
+<!--			<property name="name" value ="Name"></property>-->
+<!--			<replaced-method name="replace" replacer="replace"></replaced-method>-->
+<!--		</bean>-->
+
+<!--	<bean id = "student" class = "org.springframework.Student">-->
+<!--		<constructor-arg value="1"></constructor-arg>-->
+<!--		<constructor-arg value="2"></constructor-arg>-->
+<!--		<constructor-arg value="3"></constructor-arg>-->
+<!--	</bean>-->
+
+<!--	<bean id="address" class ="org.springframework.Address">-->
+<!--		<property name="id" value="99"></property>-->
+<!--		<property name="name" value="zj"></property>-->
+<!--	</bean>-->
+
+
+		<bean id = "student" class="org.springframework.Student" scope="prototype">
+			<property name="id" value="1"></property>
+		</bean>
+
+		<bean id = "add" class="org.springframework.Address" autowire="byType">
 		</bean>
 
 
-<!--		<bean id ="factory" class = "org.springframework.Factory"></bean>-->
+<!--	&lt;!&ndash;			<bean id = "subStudent" class = "org.springframework.SubStudent" parent="student"></bean>&ndash;&gt;-->
+<!--	<bean id = "person" class="org.springframework.Person">-->
+<!--		<property name="student">-->
+<!--			<bean class = "org.springframework.Student"></bean>-->
+<!--		</property>-->
+<!--	</bean>-->
+<!--	<bean id = "person5" class="org.springframework.Person"></bean>-->
+<!--	<bean id = "person6" class="org.springframework.Person">-->
+<!--	</bean>-->
+
+<!--	<bean id="application" class="org.springframework.MyApplicationListener"></bean>-->
+
+<!--&lt;!&ndash;	<bean id ="processor" class = "org.springframework.MyLifecycleProcessor"></bean>&ndash;&gt;-->
+
+<!--	<bean id = "one" class="org.springframework.OneSmartLifecycleProcessor"></bean>-->
+
+<!--	<bean id = "two" class="org.springframework.TwoSmartLifecycleProcessor"></bean>-->
+
+<!--	<bean id = "thee" class = "org.springframework.MyLifecycle"></bean>-->
+
+<!--	<alias name="person" alias="person1"></alias>-->
+<!--	<alias name="person" alias="person2"></alias>-->
+<!--	<alias name="person" alias="person3"></alias>-->
+<!--	<alias name="person1" alias="person4"></alias>-->
+<!--	<bean id = "factoryBean" class = "org.springframework.MyFactoryBean"></bean>-->
+
+
+<!--	<bean id = "MyInstantiationAwareBeanPostProcessor" class="org.springframework.MyInstantiationAwareBeanPostProcessor"></bean>-->
 
 <!--		<bean id = "studentFactoy" factory-bean="factory" factory-method="getStudent">-->
 <!--			<constructor-arg name="id" value="1"></constructor-arg>-->
@@ -34,6 +78,21 @@
 <!--		<bean id = "look" class = "org.springframework.LookUp">-->
 <!--			<lookup-method name="getStudent" bean="sub"></lookup-method>-->
 <!--		</bean>-->
+
+
+<!--		<bean id ="factory" class = "org.springframework.Factory"></bean>-->
+
+<!--		<bean id = "studentFactoy" factory-bean="factory" factory-method="getStudent">-->
+<!--			<constructor-arg name="id" value="1"></constructor-arg>-->
+<!--			<constructor-arg name="address" value="2"></constructor-arg>-->
+<!--			<constructor-arg name="name" value="3"></constructor-arg>-->
+<!--		</bean>-->
+
+<!--		<bean id = "processor" class = "org.springframework.BeforeBeanPostProcessor"></bean>-->
+
+<!--		<bean id = "replace" class = "org.springframework.Replace"></bean>-->
+<!--	-->
+
 
 <!--		<bean id ="factoryBean" class="org.springframework.MyFactoryBean"></bean>-->
 

@@ -52,6 +52,12 @@ final class PostProcessorRegistrationDelegate {
 	}
 
 
+	/**
+	 * 这里逻辑是执行BeanDefinitionRegistryPostProcessor
+	 *   后执行BeanFactoryPostProcessor
+	 * @param beanFactory
+	 * @param beanFactoryPostProcessors
+	 */
 	public static void invokeBeanFactoryPostProcessors(
 			ConfigurableListableBeanFactory beanFactory, List<BeanFactoryPostProcessor> beanFactoryPostProcessors) {
 

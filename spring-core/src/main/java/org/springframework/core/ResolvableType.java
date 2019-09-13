@@ -114,6 +114,7 @@ public class ResolvableType implements Serializable {
 
 	/**
 	 * The component type for an array or {@code null} if the type should be deduced.
+	 * 数组里面包裹的类
 	 */
 	@Nullable
 	private final ResolvableType componentType;
@@ -121,6 +122,8 @@ public class ResolvableType implements Serializable {
 	@Nullable
 	private final Integer hash;
 
+
+	//封装的类 Class
 	@Nullable
 	private Class<?> resolved;
 
@@ -130,6 +133,7 @@ public class ResolvableType implements Serializable {
 	@Nullable
 	private volatile ResolvableType[] interfaces;
 
+	//泛型参数
 	@Nullable
 	private volatile ResolvableType[] generics;
 
@@ -204,7 +208,7 @@ public class ResolvableType implements Serializable {
 
 	/**
 	 * Return the underlying Java {@link Class} being managed, if available;
-	 * otherwise {@code null}.
+	 * otherwise {@code null}.得到原生的Class List<String> 得到List</>
 	 */
 	@Nullable
 	public Class<?> getRawClass() {
@@ -237,6 +241,7 @@ public class ResolvableType implements Serializable {
 	 * @since 5.1
 	 * @see #getRawClass()
 	 * @see #resolve(Class)
+	 * 得到解析后resolved
 	 */
 	public Class<?> toClass() {
 		return resolve(Object.class);
@@ -438,6 +443,7 @@ public class ResolvableType implements Serializable {
 	 * @see #asMap()
 	 * @see #getSuperType()
 	 * @see #getInterfaces()
+	 * 找出父类当中，有type的Class
 	 */
 	public ResolvableType as(Class<?> type) {
 		if (this == NONE) {
@@ -1409,6 +1415,7 @@ public class ResolvableType implements Serializable {
 		}
 
 		// Purge empty entries on access since we don't have a clean-up thread or the like.
+		// 清除线程
 		cache.purgeUnreferencedEntries();
 
 		// Check the cache - we may have a ResolvableType which has been resolved before...
@@ -1418,6 +1425,7 @@ public class ResolvableType implements Serializable {
 			cachedType = new ResolvableType(type, typeProvider, variableResolver, resultType.hash);
 			cache.put(cachedType, cachedType);
 		}
+		//不明白为什么要重置resolved
 		resultType.resolved = cachedType.resolved;
 		return resultType;
 	}

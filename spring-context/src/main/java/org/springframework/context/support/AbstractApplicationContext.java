@@ -533,7 +533,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				// Invoke factory processors registered as beans in the context.
 				invokeBeanFactoryPostProcessors(beanFactory);
 
-				// Register bean processors that intercept bean creation.
+				// Register bean processors that intercept bean creation.添加上BeanPostProcessor到AbstractBeanFactory中的BeanPostProcessor的列表中
 				registerBeanPostProcessors(beanFactory);
 
 				// Initialize message source for this context.
@@ -545,7 +545,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				// Initialize other special beans in specific context subclasses.
 				onRefresh();//子类实现
 
-				// Check for listener beans and register them.
+				// Check for listener beans and register them.注册ApplicationEvent
 				registerListeners();
 
 				// Instantiate all remaining (non-lazy-init) singletons.
@@ -553,9 +553,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 				// Last step: publish corresponding event.
 				finishRefresh();
-			}
-
-			catch (BeansException ex) {
+			} catch (BeansException ex) {
 				if (logger.isWarnEnabled()) {
 					logger.warn("Exception encountered during context initialization - " +
 							"cancelling refresh attempt: " + ex);
@@ -600,10 +598,11 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		}
 
 		// Initialize any placeholder property sources in the context environment.
-		initPropertySources();//子类实现
+		initPropertySources();//子类实现扩展接口
 
 		// Validate that all properties marked as required are resolvable:
 		// see ConfigurablePropertyResolver#setRequiredProperties
+		//https://www.cnblogs.com/warehouse/p/9384735.html
 		getEnvironment().validateRequiredProperties();//验证所有参数
 
 		// Store pre-refresh ApplicationListeners...
@@ -623,7 +622,6 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	/**
 	 * <p>Replace any stub property sources with actual instances.
 	 * @see org.springframework.core.env.PropertySource.StubPropertySource
-	 * @see org.springframework.web.context.support.WebApplicationContextUtils#initServletPropertySources
 	 */
 	protected void initPropertySources() {
 		// For subclasses: do nothing by default.
@@ -881,7 +879,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		// Allow for caching all bean definition metadata, not expecting further changes.
 		beanFactory.freezeConfiguration();
 
-		// Instantiate all remaining (non-lazy-init) singletons.
+		// Instantiate all remaining (non-lazy-init) singletons.，先加载这个类
 		beanFactory.preInstantiateSingletons();
 	}
 

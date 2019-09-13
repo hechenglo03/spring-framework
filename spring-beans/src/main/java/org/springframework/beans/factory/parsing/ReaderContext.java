@@ -152,14 +152,14 @@ public class ReaderContext {
 	// Explicit parse events
 
 	/**
-	 * Fire an defaults-registered event.
+	 * Fire an defaults-registered event.，设置默认属性触发
 	 */
 	public void fireDefaultsRegistered(DefaultsDefinition defaultsDefinition) {
 		this.eventListener.defaultsRegistered(defaultsDefinition);
 	}
 
 	/**
-	 * Fire an component-registered event.
+	 * Fire an component-registered event.成功导入<bean标签
 	 */
 	public void fireComponentRegistered(ComponentDefinition componentDefinition) {
 		this.eventListener.componentRegistered(componentDefinition);
@@ -180,7 +180,7 @@ public class ReaderContext {
 	}
 
 	/**
-	 * Fire an import-processed event.
+	 * Fire an import-processed event.<import标签导入成功触发事件
 	 */
 	public void fireImportProcessed(String importedResource, Resource[] actualResources, @Nullable Object source) {
 		this.eventListener.importProcessed(new ImportDefinition(importedResource, actualResources, source));

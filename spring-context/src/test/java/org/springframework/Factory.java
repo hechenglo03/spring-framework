@@ -2,7 +2,7 @@ package org.springframework;
 
 public class Factory {
 
-	public Student getStudent(String name,String address,Long id){
+	public Student getStudent(String name,String address,Long id,Address add){
 		Student student = new Student();
 		student.setId(id);
 		student.setAddress(address);
