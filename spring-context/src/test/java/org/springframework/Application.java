@@ -30,7 +30,7 @@ public class Application {
 			super(path);
 		}
 
-		public String resolvepathM(String ...message){
+		public String resolvepath(String ...message){
 			return " ";
 		}
 
