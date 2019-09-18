@@ -110,6 +110,8 @@ public class PropertyEditorRegistrySupport implements PropertyEditorRegistry {
 	@Nullable
 	private Map<String, CustomEditorHolder> customEditorsForPath;//定制版本map集合
 
+
+	//父类对应的缓存
 	@Nullable
 	private Map<Class<?>, PropertyEditor> customEditorCache;
 

@@ -41,4 +41,8 @@ public class Address {
 	public String toString(){
 		return student.toString();
 	}
+
+	public void Aop(){
+		System.out.println("AOP");
+	}
 }

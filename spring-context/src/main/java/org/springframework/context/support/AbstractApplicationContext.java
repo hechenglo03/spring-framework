@@ -523,11 +523,14 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			//Tell the subclass to refresh the internal bean factory.
 			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
 
+			//System.out.println(beanFactory.getBeanDefinition("student"));
+
 			// Prepare the bean factory for use in this context.
 			prepareBeanFactory(beanFactory);
 
 			try {
 				// Allows post-processing of the bean factory in context subclasses.
+				// 子类处理
 				postProcessBeanFactory(beanFactory);
 
 				// Invoke factory processors registered as beans in the context.
@@ -568,7 +571,6 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				// Propagate exception to caller.
 				throw ex;
 			}
-
 			finally {
 				// Reset common introspection caches in Spring's core, since we
 				// might not ever need metadata for singleton beans anymore...
@@ -645,6 +647,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 */
 	protected void prepareBeanFactory(ConfigurableListableBeanFactory beanFactory) {
 		// Tell the internal bean factory to use the context's class loader etc.
+		// 设置加载器
 		beanFactory.setBeanClassLoader(getClassLoader());
 		//Spel语法解析器
 		beanFactory.setBeanExpressionResolver(new StandardBeanExpressionResolver(beanFactory.getBeanClassLoader()));
@@ -877,6 +880,9 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		beanFactory.setTempClassLoader(null);
 
 		// Allow for caching all bean definition metadata, not expecting further changes.
+		// 锁住bean meta的缓存，使用在getBeanNamesForType
+		// allBeanNamesByType : this.singletonBeanNamesByType 属性锁住
+		// 这里锁住了 configuraFrozen为true表示在调用getBeanNamesForType就直接调用缓存
 		beanFactory.freezeConfiguration();
 
 		// Instantiate all remaining (non-lazy-init) singletons.，先加载这个类
@@ -890,9 +896,11 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 */
 	protected void finishRefresh() {
 		// Clear context-level resource caches (such as ASM metadata from scanning).
+		// 清除 ResourceLoader 中的对于Resource的缓存
 		clearResourceCaches();
 
 		// Initialize lifecycle processor for this context.
+		// 初始化 LifecycleProcessor
 		initLifecycleProcessor();
 
 		// Propagate refresh to lifecycle processor first.

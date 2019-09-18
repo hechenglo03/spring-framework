@@ -2,12 +2,14 @@ package org.springframework;
 
 import org.springframework.beans.CachedIntrospectionResults;
 import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.TestListener;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.Spr7283Tests;
 import org.springframework.core.ResolvableType;
+import org.springframework.core.env.Environment;
 
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
@@ -28,21 +30,6 @@ public class Application {
 
 		public MyContext(String path){
 			super(path);
-		}
-
-		public String resolvepath(String ...message){
-			return " ";
-		}
-
-		@Override
-		public void onRefresh(){
-			this.publishEvent(new MyApplicationEvent(""));
-		}
-
-
-		protected void initBeanDefinitionReader(XmlBeanDefinitionReader reader) {
-			super.initBeanDefinitionReader(reader);
-			reader.setEventListener(new MyReaderEventListener());
 		}
 	}
 
@@ -71,11 +58,8 @@ public class Application {
 //		MyInstantiationAwareBeanPostProcessor processor = new MyInstantiationAwareBeanPostProcessor();
 		MyContext myContext = new MyContext("bean.xml");
 
-		ObjectFactory<Address> objectFactory = myContext.getBeanProvider(Address.class);
-		System.out.println(objectFactory.getObject());
-
-
-
+		Address address = (Address)myContext.getBean("address");
+		address.Aop();
 //		context.start();
 //		System.out.println("---------stop-------------");
 //		context.stop();

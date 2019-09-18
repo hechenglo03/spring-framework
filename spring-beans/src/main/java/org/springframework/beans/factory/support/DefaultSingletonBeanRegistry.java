@@ -255,6 +255,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 					if (recordSuppressedExceptions) {
 						this.suppressedExceptions = null;
 					}
+					//验证有没有退出
 					afterSingletonCreation(beanName);
 				}
 				if (newSingleton) {

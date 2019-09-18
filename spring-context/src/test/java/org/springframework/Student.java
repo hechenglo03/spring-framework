@@ -58,6 +58,7 @@ public class Student {
 	}
 
 	public String replace(){
+		System.out.println("Before");
 		return "Student";
 	}
 }

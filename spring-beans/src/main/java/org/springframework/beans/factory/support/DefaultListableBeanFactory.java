@@ -146,7 +146,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 
 	/** Whether to allow re-registration of a different definition with the same name. */
 	/**
-	 * 是否允许以同个名字注册不同的bean
+	 * 是否允许以同个名字注册不同的bean，该属性是用来表示该BeanName是否可以被人工注册Bean注册
 	 */
 	private boolean allowBeanDefinitionOverriding = true;
 
@@ -448,7 +448,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 	//---------------------------------------------------------------------
 
 	/**
-	 * 只会检查prototype类型的Bean
+	 * 这个方法只能检测自动生成的所有Bean，人工注册不能检测
 	 * @param beanName the name of the bean to look for
 	 * @return
 	 */
@@ -847,6 +847,9 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 		return iterator;
 	}
 
+	/**
+	 * 用于清除，BeanDefintion发生变动
+	 */
 	@Override
 	public void clearMetadataCache() {
 		super.clearMetadataCache();
@@ -887,6 +890,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 		// Trigger initialization of all non-lazy singleton beans...
 		for (String beanName : beanNames) {
 			RootBeanDefinition bd = getMergedLocalBeanDefinition(beanName);
+			//要求非抽象 单例 非懒加载
 			if (!bd.isAbstract() && bd.isSingleton() && !bd.isLazyInit()) {
 				if (isFactoryBean(beanName)) {
 					Object bean = getBean(FACTORY_BEAN_PREFIX + beanName);
@@ -1004,6 +1008,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 			this.frozenBeanDefinitionNames = null;
 		}
 
+		//如果先前就已经存在该bean，要清除缓存
 		if (existingDefinition != null || containsSingleton(beanName)) {
 			resetBeanDefinition(beanName);//重置所有bean对应缓存
 		}
@@ -1085,6 +1090,12 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 	}
 
 
+	/**
+	 * 人工注册单例
+	 * @param beanName the name of the bean
+	 * @param singletonObject the existing singleton object
+	 * @throws IllegalStateException
+	 */
 	@Override
 	public void registerSingleton(String beanName, Object singletonObject) throws IllegalStateException {
 		super.registerSingleton(beanName, singletonObject);
@@ -1092,6 +1103,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 		clearByTypeCache();
 	}
 
+	//全部清空
 	@Override
 	public void destroySingletons() {
 		super.destroySingletons();
